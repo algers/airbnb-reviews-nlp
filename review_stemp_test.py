@@ -13,7 +13,7 @@ stemmer = SnowballStemmer("english")
 # For example, running this (by clicking run or pressing Shift+Enter) will list the files in the input directory
 
 import os
-print(os.listdir("../input"))
+print(os.listdir("input"))
 
 # Any results you write to the current directory are saved as output.
 

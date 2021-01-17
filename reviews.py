@@ -7,7 +7,7 @@ stemmer = SnowballStemmer("english")
 
 
 import os
-print(os.listdir("../input"))
+print(os.listdir("input"))
 
 reviews = pd.read_csv("./input/reviews_overall_u3.csv", header = 0, encoding = 'latin-1')
 print(reviews.shape)
