@@ -7,13 +7,10 @@ from nltk.stem import WordNetLemmatizer
 
 stemmer = WordNetLemmatizer()
 
-# stemmer = SnowballStemmer("english")
-
 import os
 print(os.listdir("input"))
 
 reviews = pd.read_csv("./input/cleanliness_comments.csv", header = 0, encoding = 'latin-1')
-# print(reviews.shape)
 
 import re
 

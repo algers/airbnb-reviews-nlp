@@ -2,9 +2,7 @@ import numpy as np # linear algebra
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 from nltk.stem.snowball import SnowballStemmer
 
-# Use English stemmer.
 stemmer = SnowballStemmer("english")
-
 
 import os
 print(os.listdir("input"))
