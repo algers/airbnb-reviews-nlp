@@ -20,7 +20,7 @@ print(os.listdir("../input"))
 
 # Any results you write to the current directory are saved as output.
 
-reviews = pd.read_csv("./input/reviews_overall_u3.csv", header = 0, encoding = 'latin-1')
+reviews = pd.read_csv("./input/reviews_overall_u2.csv", header = 0, encoding = 'latin-1')
 # print(reviews.shape)
 
 import re
@@ -116,7 +116,7 @@ import matplotlib.pyplot as plt
 # %matplotlib inline
 
 def draw_wordcloud(dict, topic_number):
-    wc = WordCloud(max_words=2000)    
+    wc = WordCloud(max_words=1000)    
     wordcloud = WordCloud().generate_from_frequencies(dict)
     
     plt.title('Topic %s' %str(topic_number), size = 16)
@@ -124,10 +124,10 @@ def draw_wordcloud(dict, topic_number):
     plt.axis("off")        
     plt.show()
 
-draw_wordcloud(dict(reviews_topic1), topic_number=1)
-draw_wordcloud(dict(reviews_topic2), topic_number=2)
-draw_wordcloud(dict(reviews_topic3), topic_number=3)
-draw_wordcloud(dict(reviews_topic4), topic_number=4)
-draw_wordcloud(dict(reviews_topic5), topic_number=5)
-draw_wordcloud(dict(reviews_topic6), topic_number=6)
-draw_wordcloud(dict(reviews_topic7), topic_number=7)
+# draw_wordcloud(dict(reviews_topic1), topic_number=1)
+# draw_wordcloud(dict(reviews_topic2), topic_number=2)
+# draw_wordcloud(dict(reviews_topic3), topic_number=3)
+# draw_wordcloud(dict(reviews_topic4), topic_number=4)
+# draw_wordcloud(dict(reviews_topic5), topic_number=5)
+# draw_wordcloud(dict(reviews_topic6), topic_number=6)
+# draw_wordcloud(dict(reviews_topic7), topic_number=7)

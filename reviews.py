@@ -43,7 +43,7 @@ print("Created document-term matrix of size %d x %d" % (tfidf.shape[0],tfidf.sha
 
 from sklearn import decomposition
 import numpy as np
-nmf = decomposition.NMF(init = 'nndsvd', n_components = 7, max_iter = 500)
+nmf = decomposition.NMF(init = 'nndsvd', n_components = 7, max_iter = 1000)
 W = nmf.fit_transform(tfidf)
 H = nmf.components_
 print("Generated W(document-topic)) matrix of size %s and H (topic-word) matrix of size %s" % ( str(W.shape), str(H.shape)))
@@ -110,7 +110,7 @@ def draw_wordcloud(dict, topic_number):
 draw_wordcloud(dict(reviews_topic1), topic_number=1)
 draw_wordcloud(dict(reviews_topic2), topic_number=2)
 draw_wordcloud(dict(reviews_topic3), topic_number=3)
-draw_wordcloud(dict(reviews_topic4), topic_number=4)
-draw_wordcloud(dict(reviews_topic5), topic_number=5)
-draw_wordcloud(dict(reviews_topic6), topic_number=6)
-draw_wordcloud(dict(reviews_topic7), topic_number=7)
+# draw_wordcloud(dict(reviews_topic4), topic_number=4)
+# draw_wordcloud(dict(reviews_topic5), topic_number=5)
+# draw_wordcloud(dict(reviews_topic6), topic_number=6)
+# draw_wordcloud(dict(reviews_topic7), topic_number=7)
