@@ -7,7 +7,7 @@ stemmer = SnowballStemmer("english")
 import os
 print(os.listdir("input"))
 
-reviews = pd.read_csv("./input/reviews_overall_u3.csv", header = 0, encoding = 'latin-1')
+reviews = pd.read_csv("./input/reviews_overall_u2.csv", header = 0, encoding = 'latin-1')
 print(reviews.shape)
 
 import re
@@ -41,7 +41,7 @@ print("Created document-term matrix of size %d x %d" % (tfidf.shape[0],tfidf.sha
 
 from sklearn import decomposition
 import numpy as np
-nmf = decomposition.NMF(init = 'nndsvd', n_components = 7, max_iter = 1000)
+nmf = decomposition.NMF(init = 'nndsvd', n_components = 5, max_iter = 10000)
 W = nmf.fit_transform(tfidf)
 H = nmf.components_
 print("Generated W(document-topic)) matrix of size %s and H (topic-word) matrix of size %s" % ( str(W.shape), str(H.shape)))
@@ -70,25 +70,25 @@ reviews_topic2 = []
 reviews_topic3 = []
 reviews_topic4 = []
 reviews_topic5 = []
-reviews_topic6 = []
-reviews_topic7 = []
+# reviews_topic6 = []
+# reviews_topic7 = []
 
-for order_id, key, num1, num2, num3, num4, num5, num6, num7 in mylist:
+for order_id, key, num1, num2, num3, num4, num5 in mylist:
     reviews_topic1.append((key, num1))
     reviews_topic2.append((key, num2))
     reviews_topic3.append((key, num3))
     reviews_topic4.append((key, num4))
     reviews_topic5.append((key, num5))
-    reviews_topic6.append((key, num6))
-    reviews_topic7.append((key, num7))
+    # reviews_topic6.append((key, num6))
+    # reviews_topic7.append((key, num7))
 
 reviews_topic1 = sorted(reviews_topic1, key=lambda myword: myword[1], reverse=True)
 reviews_topic2 = sorted(reviews_topic2, key=lambda myword: myword[1], reverse=True)
 reviews_topic3 = sorted(reviews_topic3, key=lambda myword: myword[1], reverse=True)
 reviews_topic4 = sorted(reviews_topic4, key=lambda myword: myword[1], reverse=True)
 reviews_topic5 = sorted(reviews_topic5, key=lambda myword: myword[1], reverse=True)
-reviews_topic6 = sorted(reviews_topic6, key=lambda myword: myword[1], reverse=True)
-reviews_topic7 = sorted(reviews_topic7, key=lambda myword: myword[1], reverse=True)
+# reviews_topic6 = sorted(reviews_topic6, key=lambda myword: myword[1], reverse=True)
+# reviews_topic7 = sorted(reviews_topic7, key=lambda myword: myword[1], reverse=True)
 
 
 from wordcloud import WordCloud 
@@ -105,9 +105,9 @@ def draw_wordcloud(dict, topic_number):
     plt.axis("off")        
     plt.show()
 
-draw_wordcloud(dict(reviews_topic1), topic_number=1)
-draw_wordcloud(dict(reviews_topic2), topic_number=2)
-draw_wordcloud(dict(reviews_topic3), topic_number=3)
+# draw_wordcloud(dict(reviews_topic1), topic_number=1)
+# draw_wordcloud(dict(reviews_topic2), topic_number=2)
+# draw_wordcloud(dict(reviews_topic3), topic_number=3)
 # draw_wordcloud(dict(reviews_topic4), topic_number=4)
 # draw_wordcloud(dict(reviews_topic5), topic_number=5)
 # draw_wordcloud(dict(reviews_topic6), topic_number=6)

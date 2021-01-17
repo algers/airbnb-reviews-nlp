@@ -10,7 +10,7 @@ stemmer = WordNetLemmatizer()
 import os
 print(os.listdir("input"))
 
-reviews = pd.read_csv("./input/cleanliness_comments.csv", header = 0, encoding = 'latin-1')
+reviews = pd.read_csv("./input/reviews_overall_u4.csv", header = 0, encoding = 'latin-1')
 
 import re
 
@@ -26,12 +26,9 @@ reviews["comments_cleaned"] = reviews["comments_cleaned"].str.split().apply(lamb
 
 reviews["comments_cleaned"] = reviews["comments_cleaned"].apply(clean_text)
 pd.set_option('display.max_colwidth', None)
-print(reviews)
 
 from nltk.tokenize import RegexpTokenizer
 preprocessed = [" ".join(RegexpTokenizer(r'\w+').tokenize(reviews.comments_cleaned[idx])) for idx in reviews.index]
-
-
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_extraction import text 
@@ -49,7 +46,7 @@ print("Created document-term matrix of size %d x %d" % (tfidf.shape[0],tfidf.sha
 
 from sklearn import decomposition
 import numpy as np
-nmf = decomposition.NMF(init = 'nndsvd', n_components = 3, max_iter = 10000)
+nmf = decomposition.NMF(init = 'nndsvd', n_components = 5, max_iter = 10000)
 W = nmf.fit_transform(tfidf)
 H = nmf.components_
 print("Generated W(document-topic)) matrix of size %s and H (topic-word) matrix of size %s" % ( str(W.shape), str(H.shape)))
@@ -76,17 +73,17 @@ mylist = list(mydf.itertuples())
 reviews_topic1 = []
 reviews_topic2 = []
 reviews_topic3 = []
-# reviews_topic4 = []
-# reviews_topic5 = []
+reviews_topic4 = []
+reviews_topic5 = []
 # reviews_topic6 = []
 # reviews_topic7 = []
 
-for order_id, key, num1, num2, num3 in mylist:
+for order_id, key, num1, num2, num3, num4, num5 in mylist:
     reviews_topic1.append((key, num1))
     reviews_topic2.append((key, num2))
     reviews_topic3.append((key, num3))
-    # reviews_topic4.append((key, num4))
-    # reviews_topic5.append((key, num5))
+    reviews_topic4.append((key, num4))
+    reviews_topic5.append((key, num5))
     # reviews_topic6.append((key, num6))
     # reviews_topic7.append((key, num7))
 
