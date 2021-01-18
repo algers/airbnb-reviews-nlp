@@ -10,7 +10,7 @@ stemmer = WordNetLemmatizer()
 import os
 print(os.listdir("input"))
 
-reviews = pd.read_csv("./input/reviews_overall_u4.csv", header = 0, encoding = 'latin-1')
+reviews = pd.read_csv("./input/reviews_overall_u3.csv", header = 0, encoding = 'latin-1')
 
 import re
 
@@ -33,7 +33,7 @@ preprocessed = [" ".join(RegexpTokenizer(r'\w+').tokenize(reviews.comments_clean
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_extraction import text 
 
-custom_stop_words = ['airbnb']
+custom_stop_words = ['airbnb', 'zencity', 'host', 'wa', 'null']
 my_stop_words = text.ENGLISH_STOP_WORDS.union(custom_stop_words)
 
 vectorizer = TfidfVectorizer(min_df = 1, ngram_range = (1,1), 
@@ -46,7 +46,7 @@ print("Created document-term matrix of size %d x %d" % (tfidf.shape[0],tfidf.sha
 
 from sklearn import decomposition
 import numpy as np
-nmf = decomposition.NMF(init = 'nndsvd', n_components = 5, max_iter = 10000)
+nmf = decomposition.NMF(init = 'nndsvd', n_components = 5, max_iter = 1000)
 W = nmf.fit_transform(tfidf)
 H = nmf.components_
 print("Generated W(document-topic)) matrix of size %s and H (topic-word) matrix of size %s" % ( str(W.shape), str(H.shape)))
@@ -90,8 +90,8 @@ for order_id, key, num1, num2, num3, num4, num5 in mylist:
 reviews_topic1 = sorted(reviews_topic1, key=lambda myword: myword[1], reverse=True)
 reviews_topic2 = sorted(reviews_topic2, key=lambda myword: myword[1], reverse=True)
 reviews_topic3 = sorted(reviews_topic3, key=lambda myword: myword[1], reverse=True)
-# reviews_topic4 = sorted(reviews_topic4, key=lambda myword: myword[1], reverse=True)
-# reviews_topic5 = sorted(reviews_topic5, key=lambda myword: myword[1], reverse=True)
+reviews_topic4 = sorted(reviews_topic4, key=lambda myword: myword[1], reverse=True)
+reviews_topic5 = sorted(reviews_topic5, key=lambda myword: myword[1], reverse=True)
 # reviews_topic6 = sorted(reviews_topic6, key=lambda myword: myword[1], reverse=True)
 # reviews_topic7 = sorted(reviews_topic7, key=lambda myword: myword[1], reverse=True)
 
@@ -103,17 +103,17 @@ import matplotlib.pyplot as plt
 
 def draw_wordcloud(dict, topic_number):
     wc = WordCloud(max_words=1000)    
-    wordcloud = WordCloud().generate_from_frequencies(dict)
+    wordcloud = WordCloud().generate_from_frequencies(dict).to_file("output/lemmatizer/topic_" + str(topic_number) + ".png")
     
-    plt.title('Topic %s' %str(topic_number), size = 16)
-    plt.imshow(wordcloud, interpolation="bilinear")
-    plt.axis("off")        
-    plt.show()
+    # plt.title('Topic %s' %str(topic_number), size = 16)
+    # plt.imshow(wordcloud, interpolation="bilinear")
+    # plt.axis("off")        
+    # plt.show()
 
-# draw_wordcloud(dict(reviews_topic1), topic_number=1)
-# draw_wordcloud(dict(reviews_topic2), topic_number=2)
-# draw_wordcloud(dict(reviews_topic3), topic_number=3)
-# draw_wordcloud(dict(reviews_topic4), topic_number=4)
-# draw_wordcloud(dict(reviews_topic5), topic_number=5)
+draw_wordcloud(dict(reviews_topic1), topic_number=1)
+draw_wordcloud(dict(reviews_topic2), topic_number=2)
+draw_wordcloud(dict(reviews_topic3), topic_number=3)
+draw_wordcloud(dict(reviews_topic4), topic_number=4)
+draw_wordcloud(dict(reviews_topic5), topic_number=5)
 # draw_wordcloud(dict(reviews_topic6), topic_number=6)
 # draw_wordcloud(dict(reviews_topic7), topic_number=7)
