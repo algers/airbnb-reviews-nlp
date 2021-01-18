@@ -7,7 +7,7 @@ stemmer = SnowballStemmer("english")
 import os
 print(os.listdir("input"))
 
-reviews = pd.read_csv("./input/reviews_overall_u3.csv", header = 0, encoding = 'latin-1')
+reviews = pd.read_csv("./input/reviews_overall_u5_cleanliness_comments.csv", header = 0, encoding = 'latin-1')
 print(reviews.shape)
 
 import re
@@ -28,7 +28,7 @@ preprocessed = [" ".join(RegexpTokenizer(r'\w+').tokenize(reviews.comments_clean
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_extraction import text
 
-custom_stop_words = ['airbnb', 'zencity', 'null', 'did', 'just', 'got', 'like', 'good', 'day', 'great']
+custom_stop_words = ['airbnb', 'zencity', 'null', 'did', 'just', 'got', 'like', 'good', 'day', 'great', 'nan']
 
 my_stop_words = text.ENGLISH_STOP_WORDS.union(custom_stop_words)
 
@@ -48,7 +48,7 @@ H = nmf.components_
 print("Generated W(document-topic)) matrix of size %s and H (topic-word) matrix of size %s" % ( str(W.shape), str(H.shape)))
 
 feature_names = vectorizer.get_feature_names()
-n_top_words = 15
+n_top_words = 10
 
 # Print top words in each topic
 for topic_idx, topic in enumerate(H):
@@ -66,34 +66,34 @@ for topic_idx, topic in enumerate(H):
 
 mylist = list(mydf.itertuples())
 
-reviews_topic0 = []
 reviews_topic1 = []
 reviews_topic2 = []
 reviews_topic3 = []
 reviews_topic4 = []
+reviews_topic5 = []
 reviews_topic_all = []
 # reviews_topic6 = []
 # reviews_topic7 = []
 
 for order_id, key, num1, num2, num3, num4, num5 in mylist:
-    reviews_topic0.append((key, num1))
+    reviews_topic1.append((key, num1))
     reviews_topic_all.append((key, num1))
-    reviews_topic1.append((key, num2))
+    reviews_topic2.append((key, num2))
     reviews_topic_all.append((key, num2))
-    reviews_topic2.append((key, num3))
+    reviews_topic3.append((key, num3))
     reviews_topic_all.append((key, num3))
-    reviews_topic3.append((key, num4))
+    reviews_topic4.append((key, num4))
     reviews_topic_all.append((key, num4))
-    reviews_topic4.append((key, num5))
+    reviews_topic5.append((key, num5))
     reviews_topic_all.append((key, num5))
     # reviews_topic6.append((key, num6))
     # reviews_topic7.append((key, num7))
 
-reviews_topic0 = sorted(reviews_topic0, key=lambda myword: myword[1], reverse=True)
 reviews_topic1 = sorted(reviews_topic1, key=lambda myword: myword[1], reverse=True)
 reviews_topic2 = sorted(reviews_topic2, key=lambda myword: myword[1], reverse=True)
 reviews_topic3 = sorted(reviews_topic3, key=lambda myword: myword[1], reverse=True)
 reviews_topic4 = sorted(reviews_topic4, key=lambda myword: myword[1], reverse=True)
+reviews_topic5 = sorted(reviews_topic5, key=lambda myword: myword[1], reverse=True)
 # reviews_topic_all = sorted(reviews_topic_all, key=lambda myword: myword[1], reverse=True)
 # reviews_topic6 = sorted(reviews_topic6, key=lambda myword: myword[1], reverse=True)
 # reviews_topic7 = sorted(reviews_topic7, key=lambda myword: myword[1], reverse=True)
@@ -106,7 +106,7 @@ import matplotlib.pyplot as plt
 
 def draw_wordcloud(dict, topic_number):
     wc = WordCloud(max_words=1000)    
-    wordcloud = WordCloud().generate_from_frequencies(dict).to_file("output/base/topic_" + str(topic_number) + ".png")
+    wordcloud = WordCloud().generate_from_frequencies(dict).to_file("output/cleanliness/topic_" + str(topic_number) + ".png")
     
     # plt.title('Topic %s' %str(topic_number), size = 16)
     # plt.imshow(wordcloud, interpolation="bilinear")
@@ -115,10 +115,10 @@ def draw_wordcloud(dict, topic_number):
 
 # draw_wordcloud(dict(reviews_topic_all), topic_number=99)
 
-draw_wordcloud(dict(reviews_topic0), topic_number=0)
 draw_wordcloud(dict(reviews_topic1), topic_number=1)
 draw_wordcloud(dict(reviews_topic2), topic_number=2)
 draw_wordcloud(dict(reviews_topic3), topic_number=3)
 draw_wordcloud(dict(reviews_topic4), topic_number=4)
+draw_wordcloud(dict(reviews_topic5), topic_number=5)
 # draw_wordcloud(dict(reviews_topic6), topic_number=6)
 # draw_wordcloud(dict(reviews_topic7), topic_number=7)

@@ -2,13 +2,15 @@ import numpy as np # linear algebra
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 from nltk.stem.snowball import SnowballStemmer
 
-stemmer = SnowballStemmer("english")
+
+from nltk.stem import PorterStemmer
+stemmer = PorterStemmer()
 
 import os
 print(os.listdir("input"))
 
 
-reviews = pd.read_csv("./input/reviews_overall_u3.csv", header = 0, encoding = 'latin-1')
+reviews = pd.read_csv("./input/reviews_overall_u4.csv", header = 0, encoding = 'latin-1')
 
 
 import re
@@ -33,7 +35,7 @@ preprocessed = [" ".join(RegexpTokenizer(r'\w+').tokenize(reviews.comments_clean
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_extraction import text 
 
-custom_stop_words = ['airbnb']
+custom_stop_words = ['airbnb', 'wa', 'got', 'null', 'someth']
 my_stop_words = text.ENGLISH_STOP_WORDS.union(custom_stop_words)
 
 vectorizer = TfidfVectorizer(min_df = 1, ngram_range = (1,1), 
