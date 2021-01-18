@@ -28,7 +28,7 @@ preprocessed = [" ".join(RegexpTokenizer(r'\w+').tokenize(reviews.comments_clean
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_extraction import text
 
-custom_stop_words = ['airbnb', 'zencity', 'null', 'did', 'just', 'got', 'like', 'good', 'day', 'great', 'nan']
+custom_stop_words = ['airbnb', 'zencity', 'null', 'did', 'just', 'got', 'like', 'good', 'day', 'great', 'nice', 'didnt', 'did', 'told', 'bad', 'didn', 'unit', 'units', 'said', 'bnb', 'given', 'dont', 'don', 'nan']
 
 my_stop_words = text.ENGLISH_STOP_WORDS.union(custom_stop_words)
 

@@ -5,7 +5,7 @@ from nltk.stem.snowball import SnowballStemmer
 stemmer = SnowballStemmer("english")
 
 import os
-print(os.listdir("input"))
+# print(os.listdir("input"))
 
 reviews = pd.read_csv("./input/reviews_overall_u3.csv", header = 0, encoding = 'latin-1')
 print(reviews.shape)
@@ -23,12 +23,10 @@ reviews["comments_cleaned"] = reviews.concat_comments.apply(clean_text)
 from nltk.tokenize import RegexpTokenizer
 preprocessed = [" ".join(RegexpTokenizer(r'\w+').tokenize(reviews.comments_cleaned[idx])) for idx in reviews.index]
 
-
-
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_extraction import text
 
-custom_stop_words = ['airbnb', 'zencity', 'null', 'did', 'just', 'got', 'like', 'good', 'day', 'great']
+custom_stop_words = ['airbnb', 'zencity', 'null', 'did', 'just', 'got', 'like', 'good', 'day', 'great', 'nice', 'didnt', 'did', 'told', 'bad', 'didn', 'unit', 'units', 'said', 'bnb', 'given', 'dont', 'don']
 
 my_stop_words = text.ENGLISH_STOP_WORDS.union(custom_stop_words)
 
@@ -55,7 +53,6 @@ for topic_idx, topic in enumerate(H):
     print("Topic #%d:" % topic_idx)
     print(" ".join([feature_names[i]
                     for i in topic.argsort()[:-n_top_words - 1:-1]]))
-
 
 
 # Create pandas dataframe for the topics
