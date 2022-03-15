@@ -1,0 +1,13 @@
+(630, 2)
+Created document-term matrix of size 630 x 5257
+Generated W(document-topic)) matrix of size (630, 5) and H (topic-word) matrix of size (5, 5257)
+Topic #0:
+building fob
+Topic #1:
+clean dirty
+Topic #2:
+terrible experience
+Topic #3:
+room door
+Topic #4:
+parking place
